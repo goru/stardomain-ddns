@@ -1,7 +1,7 @@
 stardomain-ddns
 ===============
 
-Please specify email address, password and file name of DNS records.
+Please specify email address, password and file name of DNS records.  
 The content of DNS records will be specified to textarea of bulk update page.
 
 ```
