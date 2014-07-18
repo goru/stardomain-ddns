@@ -1,9 +1,24 @@
-var email = 'your email address';
-var pass = 'your passeord';
-var dns = 'dns records';
+var system = require('system');
+if (system.args.length !== 4) {
+  console.log('Please specify email address, password and file name of DNS records.');
+  console.log('$ phantomjs ' + system.args[0] + ' <email address> <password> <file name of DNS records>');
+  phantom.exit();
+}
+
+var emailAddress = system.args[1];
+var password = system.args[2];
+
+var fs = require('fs');
+if (!fs.isReadable(system.args[3])) {
+  console.log('can not read specified file.');
+  phantom.exit();
+}
+
+var dnsRecords = fs.read(system.args[3]);
+console.log('update DNS records with');
+console.log(dnsRecords);
 
 var page = require('webpage').create();
-
 var funcs = new Array();
 funcs.push(function () {
   var url = 'https://secure.netowl.jp/netowl/?service=stardomain';
@@ -15,7 +30,7 @@ funcs.push(function () {
     document.getElementsByName('mailaddress')[0].value = e;
     document.getElementsByName('password')[0].value = p;
     document.getElementsByName('action_user_login')[0].click();
-  }, email, pass);
+  }, emailAddress, password);
 });
 
 funcs.push(function () {
@@ -42,7 +57,7 @@ funcs.push(function () {
   page.evaluate(function(d) {
     document.getElementsByName('content')[0].value = d;
     document.getElementsByName('action_user_dns_edittxt_conf')[0].click();
-  }, dns);
+  }, dnsRecords);
 });
 
 funcs.push(function () {
