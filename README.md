@@ -1,9 +1,9 @@
 stardomain-ddns
 ===============
 
-Please modify email, pass and dns.
-The value of dns will be specified to textarea of bulk update page.
+Please specify email address, password and file name of DNS records.
+The content of DNS records will be specified to textarea of bulk update page.
 
 ```
-$ phantomjs stardomain-ddns.js
+$ phantomjs stardomain-ddns.js <email address> <password> <file name of DNS records>
 ```
