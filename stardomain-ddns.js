@@ -18,7 +18,11 @@ var dnsRecords = fs.read(system.args[3]);
 console.log('update DNS records with');
 console.log(dnsRecords);
 
+var userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:30.0) Gecko/20100101 Firefox/30.0';
+
 var page = require('webpage').create();
+page.settings.userAgent = userAgent;
+
 var funcs = new Array();
 funcs.push(function () {
   var url = 'https://secure.netowl.jp/netowl/?service=stardomain';
