@@ -50,7 +50,12 @@ funcs.push(function () {
 });
 
 funcs.push(function () {
-  page.open('https://secure.netowl.jp/star-domain/?action_user_dns_edittxt_index=true');
+  page.evaluate(function() {
+    var elem = document.getElementsByClassName('submenu_04')[0].firstElementChild;
+    var e = document.createEvent('Events');
+    e.initEvent('click', true, false);
+    elem.dispatchEvent(e);
+  });
 });
 
 funcs.push(function () {
@@ -73,6 +78,7 @@ funcs.push(function () {
 page.onLoadFinished = function () {
   //console.log(page.title);
   //console.log(page.url);
+  //console.log(page.content);
 
   if (funcs.length > 0) {
     var func = funcs.shift();
